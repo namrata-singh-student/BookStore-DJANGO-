@@ -1,0 +1,197 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="{% static 'style1.css' %}"/>
+  <title>Main Page</title>
+</head>
+<body>
+  <section class="section">
+  <header class="header">
+    <a href="index1.html"><img class="logo" src="{% static 'logo.png' %}"></a>
+    <div class="head">Book Farm</div>
+    <nav>
+      <ul class="nav_links">
+        <li><a href="#">HOME</a></li>
+        <li><a href="#" onclick="showMenu();">CATALOGUE</a></li>
+        <li><a href="{% url 'contact' %}">CONTACTS</a></li>
+        <li><a href="{% url 'loginn' %}">LOGIN</a></li>
+      </ul>
+    </nav>
+  </header>
+  <div class="text-box">
+    <p>
+      Feel the Love on Every Page
+    </p>
+  </div>
+  <div class="products-main" id="items">
+  <div>
+    <button  class="hide" onclick="hideMenu();">X</button>
+  </div>
+  <div class="tag">
+    Best Seller 
+  </div>
+  <div class="products">
+    
+    <div class="item">
+      <img src="{% static 'img3.png' %}">
+      <div class="write">
+      <h1>Harry Potter Series
+        1500/-
+      </h1>
+      Available Copies:<span id="quantity1">10</span>
+      <button class="addCart" name="a1" onclick="buyBook(1,'Harry Potter Series')">
+        Buy</button>
+      </div>
+    </div>
+    <div class="item">
+      <img src="{% static 'img4.jpg' %}">
+      <div class="write">
+      <h1>LOTR Series
+        1000/-
+      </h1>
+      Available Copies:<span id="quantity2">7</span>
+      <button class="addCart" name="a2" onclick="buyBook(2,'LOTR Series')">
+        Buy
+      </button>
+      </div>
+    </div>
+    <div class="item">
+      <img src="{% static 'img5.webp' %}">
+      <div class="write">
+      <h1>The Alchemist
+        230/-
+      </h1>
+      Available Copies:<span id="quantity3">9</span>
+      <button class="addCart" name="a3" onclick="buyBook(3,'The Alchemist')">
+       Buy
+      </button>
+      </div>
+    </div>
+    <div class="item">
+      <img src="{% static 'img6.jpg' %}">
+      <div class="write">
+      <h1>Feluda Series
+        2000/-
+      </h1>
+      Available Copies:<span id="quantity4">4</span>
+      <button class="addCart" name="a4" onclick="buyBook(4,'Feluda Series')">
+        Buy
+      </button>
+      </div>
+    </div>
+    <div class="item">
+      <img src="{% static 'img7.jpeg' %}">
+      <div class="write">
+      <h1>Ikigai
+        200/-
+      </h1>
+      Available Copies:<span id="quantity5">12</span>
+      <button class="addCart" name="a5" onclick="buyBook(5,'Ikigai')">
+        Buy
+      </button>
+      </div>
+    </div>
+    <div class="item">
+      <img src="{% static 'img8.jpg' %}">
+      <div class="write">
+      <h1>Dickens Novels
+        1500/-
+      </h1>
+      Available Copies:<span id="quantity6">8</span>
+      <button class="addCart" name="a6" onclick="buyBook(6,'Dickens Novels')">
+      Buy
+      </button>
+      </div>
+    </div>
+  </div>
+  </div>
+  </section>
+  <section>
+  
+  <div class="mid">CATEGORIES</div>
+    <div class="genre">
+      <div class="pick">
+        <h1>DETECTIVE</h1>
+        <img src="{% static 'detective.jpg' %}">  
+      </div>
+      <div class="pick">
+        <h1>FANTASY</h1>
+        <img src="{% static 'fantasy.jpg' %}">
+      </div>
+      <div class="pick">
+        <h1>THRILLER</h1>
+        <img src="{% static 'thriller.webp' %}">
+      </div>
+      <div class="pick">
+        <h1>HORROR</h1>
+        <img src="{% static 'horror.webp' %}">
+      </div>
+      <div class="pick">
+        <h1>COMEDY</h1>
+        <img src="{% static 'comedy.png' %}">  
+      </div>
+      <div class="pick">
+        <h1>HISTORICAL</h1>
+        <img src="{% static 'history.jpg' %}">
+      </div>
+      <div class="pick">
+        <h1>ROMANCE</h1>
+        <img src="{% static 'romance.png' %}">
+      </div>
+      <div class="pick">
+        <h1>TRAGEDY</h1>
+        <img src="{% static 'tragedy.png' %}">
+      </div>
+    </div>
+  </section>
+  <script>
+
+var navBar = document.getElementById("items");
+
+function showMenu(){
+ navBar.style.right = "0px";
+}
+function hideMenu(){
+  navBar.style.right = "-50%";
+ }
+
+ 
+  function buyBook(bookNumber, bookName) {
+    var quantityElement = document.getElementById('quantity' + bookNumber);
+    var currentQuantity = parseInt(quantityElement.textContent);
+    
+    if (currentQuantity > 0) {
+      // Update quantity display
+      quantityElement.textContent = currentQuantity - 1;
+      localStorage.setItem('selectedBook', bookName);
+      window.location.href = "{% url 'form' %} ";
+
+      // Update localStorage
+      localStorage.setItem('quantity' + bookNumber, currentQuantity - 1);
+    } else {
+      alert("Sorry, this book is out of stock!");
+    }
+  }
+
+  // Retrieve quantities from localStorage and update the display
+  window.addEventListener('DOMContentLoaded', function() {
+    for (var i = 1; i <= 6; i++) {
+      var quantityElement = document.getElementById('quantity' + i);
+      var storedQuantity = localStorage.getItem('quantity' + i) || 0;
+      
+      // Update quantity display
+      quantityElement.textContent = storedQuantity;
+    }
+  });
+
+
+
+
+
+
+  </script>
+</body>
+</html>

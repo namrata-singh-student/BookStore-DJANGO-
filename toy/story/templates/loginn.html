@@ -1,0 +1,45 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+<link rel="stylesheet" href="{% static 'loginStyle.css' %}"/>
+</head>
+<body>
+    <main>
+        <header>
+            <h4>Admin Login</h4>
+        </header>
+        <form action="{% url 'logcodee' %}" method="post">
+            {% csrf_token %}
+
+            <div class="form_wrapper">
+                <input id="input" type="text" name="a1" required>
+                <label for="input">Username</label>
+                <span class="material-symbols-outlined">person</span>
+            </div>
+            <div class="form_wrapper">
+                <input id="Password" type="Password" name="a2" required>
+                <label for="Password">Password</label>
+                <span class="material-symbols-outlined">
+                    lock
+                    </span>
+            </div>
+             <div class="remember_box">
+                <div class="remember">
+                <input type="checkbox">Remember me 
+             </div>  
+             <a href="#">Forgot Password?</a>
+            </div>
+            <button>Login</button>
+            <div class="new_account">Don't Have Account?<a href="#" >Sign up</a></div>
+        </form>
+    </main>
+</body>
+</html>

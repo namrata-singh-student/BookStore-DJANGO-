@@ -1,0 +1,55 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Booking Form</title>
+    <link rel="stylesheet" href="{% static 'styleForm.css' %}"/>
+</head>
+<body>
+
+    <h2>Booking Form</h2>
+    
+    <form action="{% url 'userForm' %}" method="post">
+        {% csrf_token %}
+        <label for="bookingDate">Booking Date:</label>
+        <input type="date" id="bookingDate" name="a1" required><br>
+
+        <label for="bookName">Book Name:</label>
+        <input type="text" id="bookName" name="a2" required><br>
+
+        <label for="fullName">Full Name:</label>
+        <input type="text" id="fullName" name="a3" required><br>
+
+        <label for="city">City:</label>
+        <input type="text" id="city" name="a4" required><br>
+
+        <label for="address">Address:</label>
+        <textarea id="address" name="a5" required></textarea><br>
+
+        <label for="email">Email ID:</label>
+        <input type="email" id="email" name="a6" required><br>
+
+        <label for="contact">Contact:</label>
+        <input type="tel" id="contact" name="a7" pattern="[0-9]{10}" required>
+        <small>Enter a 10-digit phone number</small><br>
+
+        <input type="submit" onclick="showAlert();">
+    </form>
+   
+    <script>
+        function showAlert(){
+            alert("Thanks for buying!");
+        }
+        
+  document.addEventListener('DOMContentLoaded', function() {
+    var selectedBook = localStorage.getItem('selectedBook');
+    if (selectedBook) {
+      document.getElementById('bookName').value = selectedBook;
+    }
+  });
+
+    </script>
+</body>
+</html>
